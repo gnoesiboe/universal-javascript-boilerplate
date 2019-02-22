@@ -22,7 +22,8 @@
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
         "react": "^16.8.3",
-        "react-dom": "^16.8.3"
+        "react-dom": "^16.8.3",
+        "utility-types": "^3.4.1"
     },
     "devDependencies": {
         "@types/compression": "0.0.36",

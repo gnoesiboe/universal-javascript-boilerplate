@@ -1,8 +1,13 @@
 import React from 'react';
+import AuthenticationContextProvider from './security/AuthenticationContextProvider';
+import Login from './authentication/Login';
 
 const App: React.FunctionComponent<{}> = () => (
     <div className="container">
-        <h1>@todo Create some React app</h1>
+        <h1>Some app</h1>
+        <AuthenticationContextProvider>
+            <Login />
+        </AuthenticationContextProvider>
     </div>
 );
 
