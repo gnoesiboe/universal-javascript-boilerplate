@@ -14,6 +14,47 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            {
+                test: /\.scss$/,
+                exclude: [path.resolve('src/client/components')],
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: ['src'],
+                        },
+                    },
+                ],
+            },
+            {
+                test: /\.scss$/,
+                include: [path.resolve('src/client/components')],
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'typings-for-css-modules-loader',
+                        options: {
+                            localIdentName: '[local]-[hash:base64:5]',
+                            modules: true,
+                            namedExport: true,
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: ['src'],
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {

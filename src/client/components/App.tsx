@@ -1,8 +1,8 @@
 import React from 'react';
 
-const App = () => (
-    <div>
-        <p>@todo Create some React app</p>
+const App: React.FunctionComponent<{}> = () => (
+    <div className="container">
+        <h1>@todo Create some React app</h1>
     </div>
 );
 
