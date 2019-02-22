@@ -20,7 +20,9 @@
         "arrow-parens": false,
         "semicolon": false,
         "trailing-comma": false,
-        "only-arrow-functions": false
+        "only-arrow-functions": false,
+        "no-implicit-dependencies": true,
+        "no-unused-variable": true
     },
     "rulesDirectory": [],
     "include": ["./src/**/*"]
