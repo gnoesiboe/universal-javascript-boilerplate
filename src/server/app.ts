@@ -17,18 +17,17 @@ app.use(loggingMiddleware);
 app.use(compression());
 app.use(bodyparser.json());
 app.use(securityMiddleware.initialize());
-
-app.get('/', (request, response) => {
-    response.send({
-        title: 'Hallo!',
-    });
-});
-
 app.use('/authentication', authenticationRouter);
 app.use(
     '/profile',
     passport.authenticate('jwt', { session: false }),
     profileRouter
 );
+
+app.get('/', (request, response) => {
+    response.send({
+        title: 'Hallo!',
+    });
+});
 
 export default app;
