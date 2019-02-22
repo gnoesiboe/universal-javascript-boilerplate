@@ -18,8 +18,8 @@ authenticationRouter.post('/login', (request, response, next) => {
                 return response.status(400).send();
             }
 
-            request.login(account, { session: false }, err => {
-                if (err) {
+            request.login(account, { session: false }, err2 => {
+                if (err2) {
                     return next(err);
                 }
 
