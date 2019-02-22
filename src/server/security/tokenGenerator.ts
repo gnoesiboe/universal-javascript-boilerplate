@@ -4,5 +4,10 @@ import { Account } from '../..//common/model/Account';
 export const PRIVATE_KEY: string = 'Testasdflkasjdfsdf';
 
 export function createAccountToken(account: Account): string {
-    return jwt.sign(JSON.stringify(account), PRIVATE_KEY);
+    const accountAsString: string = JSON.stringify({
+        ...account,
+        exp: '1d',
+    });
+
+    return jwt.sign(accountAsString, PRIVATE_KEY);
 }
