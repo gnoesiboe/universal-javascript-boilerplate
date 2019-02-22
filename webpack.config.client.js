@@ -1,11 +1,12 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDevEnvironment = process.env.NODE_ENV === 'dev';
 
 module.exports = {
-    entry: './src/server/index.ts',
+    entry: './src/client/index.tsx',
     devtool: isDevEnvironment ? 'inline-source-map' : 'source-map',
-    target: 'node',
+    target: 'web',
     module: {
         rules: [
             {
@@ -20,10 +21,11 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist/server'),
+        path: path.resolve(__dirname, 'dist/client'),
     },
-    node: {
-        fs: 'empty',
-        path: true,
-    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src/assets/index.html'),
+        }),
+    ],
 };
