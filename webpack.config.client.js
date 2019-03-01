@@ -69,4 +69,13 @@ module.exports = {
             template: path.resolve(__dirname, 'src/assets/index.html'),
         }),
     ],
+    devServer: {
+        port: 8080,
+        historyApiFallback: true,
+    },
+    node: {
+        fs: 'empty',
+        path: 'empty',
+        net: 'empty',
+    },
 };

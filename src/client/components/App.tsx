@@ -1,14 +1,16 @@
 import React from 'react';
 import AuthenticationContextProvider from './security/AuthenticationContextProvider';
-import Login from './authentication/Login';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
+import routes from './../config/routing/routes';
+import { Container } from 'reactstrap';
 
-const App: React.FunctionComponent<{}> = () => (
-    <div className="container">
-        <h1>Some app</h1>
+const App: React.FunctionComponent = () => (
+    <Container>
         <AuthenticationContextProvider>
-            <Login />
+            <Router>{renderRoutes(routes)}</Router>
         </AuthenticationContextProvider>
-    </div>
+    </Container>
 );
 
 export default App;

@@ -13,3 +13,7 @@ export type AccountProfileResponseResult = {
 export type AuthenticationLoginResponseResult = {
     token: string;
 };
+
+export type ErrorResponseResult = {
+    message: string;
+};
