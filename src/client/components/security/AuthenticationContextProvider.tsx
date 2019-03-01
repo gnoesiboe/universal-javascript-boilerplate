@@ -59,6 +59,7 @@ export default class AuthenticationContextProvider extends React.Component<
                     currentState => ({
                         ...currentState,
                         isLoggedIn: true,
+                        token,
                     }),
                     () => {
                         store.set(TOKEN_STORE_NAMESPACE, token);
