@@ -4,6 +4,7 @@ import {
     createLoginPath,
     createProfilePath,
     createLogoutPath,
+    createHomePath,
 } from '../config/routing/urlGenerator';
 import { renderRoutes } from 'react-router-config';
 import { RouteConfigComponentProps } from 'react-router-config';
@@ -29,6 +30,11 @@ const Base: React.FunctionComponent<Props> = ({ route, isLoggedIn }) => {
         <div>
             <Navbar color="dark" dark expand="md">
                 <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        <Link to={createHomePath()} className="nav-link">
+                            Home
+                        </Link>
+                    </NavItem>
                     {!isLoggedIn && (
                         <NavItem>
                             <Link to={createLoginPath()} className="nav-link">
