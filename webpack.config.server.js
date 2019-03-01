@@ -1,6 +1,6 @@
 const path = require('path');
-
 const isDevEnvironment = process.env.NODE_ENV === 'dev';
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: './src/server/index.ts',
@@ -26,4 +26,9 @@ module.exports = {
         fs: 'empty',
         path: true,
     },
+    plugins: [
+        new Dotenv({
+            path: path.resolve(__dirname, '.server.env'),
+        }),
+    ],
 };

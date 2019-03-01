@@ -13,12 +13,11 @@ import {
 import { createNotFoundResponseBody } from './response/factory/errorResponseBodyFactory';
 import cors from 'cors';
 import { createAccountProfileResponseBody } from './response/factory/accountResponseBodyFactory';
+import settings from './config/settings';
 
 const app = express();
 
-export const PORT = process.env.PORT || 3000;
-
-app.set('port', PORT);
+app.set('port', settings.port);
 
 app.use(cors());
 app.use(loggingMiddleware);
