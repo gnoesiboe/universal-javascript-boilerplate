@@ -6,6 +6,9 @@ import {
     findAccountWithId,
 } from './../repository/accountRepository';
 import { PRIVATE_KEY } from '../security/tokenGenerator';
+import { Request, Response, NextFunction } from 'express';
+import { createUnauthorizedResponseBody } from '../response/factory/errorResponseBodyFactory';
+import { Account } from './../../common/model/Account';
 
 passport.use(
     new LocalStrategy((username, password, done) => {
@@ -43,4 +46,38 @@ passport.use(
     )
 );
 
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+
 export default passport;
+
+export const withAuthenticate = (
+    request: Request,
+    response: Response,
+    next: NextFunction,
+    callback: (account: Account) => void
+) =>
+    passport.authenticate('jwt', function(error, account) {
+        if (error) {
+            return next(error);
+        }
+
+        if (!account) {
+            return response
+                .status(401)
+                .send(createUnauthorizedResponseBody('Unauthorized'));
+        }
+
+        request.logIn(account, error2 => {
+            if (error2) {
+                return next(error2);
+            }
+
+            return callback(account);
+        });
+    })(request, response, next);

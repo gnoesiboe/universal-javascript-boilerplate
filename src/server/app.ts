@@ -2,16 +2,17 @@ import express from 'express';
 import compression from 'compression';
 import bodyparser from 'body-parser';
 import loggingMiddleware from './middleware/loggingMiddleware';
-import securityMiddleware from './middleware/securityMiddleware';
+import securityMiddleware, {
+    withAuthenticate,
+} from './middleware/securityMiddleware';
 import authenticationRouter from './routes/authenticationRouter';
-import profileRouter from './routes/profileRouter';
-import passport from './middleware/securityMiddleware';
 import {
     AUTHENTICATION_PREFIX,
     createApiProfilePath,
 } from './../common/routing/urlGenerator';
 import { createNotFoundResponseBody } from './response/factory/errorResponseBodyFactory';
 import cors from 'cors';
+import { createAccountProfileResponseBody } from './response/factory/accountResponseBodyFactory';
 
 const app = express();
 
@@ -26,11 +27,11 @@ app.use(bodyparser.json());
 app.use(securityMiddleware.initialize());
 app.use(AUTHENTICATION_PREFIX, authenticationRouter);
 
-app.use(
-    createApiProfilePath(),
-    passport.authenticate('jwt', { session: false }),
-    profileRouter
-);
+app.get(createApiProfilePath(), function(request, response, next) {
+    withAuthenticate(request, response, next, account => {
+        response.send(createAccountProfileResponseBody(account));
+    });
+});
 
 app.get('*', (request, response) => {
     response.status(404).send(createNotFoundResponseBody('Resource not found'));
